@@ -1,7 +1,7 @@
 import { Product } from "../models/product.model.js"
 
 
-// Create products
+// Create products -- Admin
 export const createProduct = async (req, res)=> {
   
    try{ const product = await Product.create(req.body)
@@ -16,8 +16,38 @@ export const createProduct = async (req, res)=> {
     }
 }
 
-const getAllProducts = (req, res) => {
-    res.status(200).json({message: "route is working fine."})
+export const getAllProducts = async (req, res) => {
+    const products = await Product.find();
+
+    res.status(200).json({
+        success: true,
+        products
+    })
 }
 
-export { getAllProducts }
+// Update Product --Admin
+export const updateProduct = async (req, res, next) => {
+    
+    let product = await Product.findById(req.params.id);
+
+    if(!product){
+       return res.status(500).json({
+        success: false,
+        message: "Product not found"
+       })
+    }
+
+    product = await Product.findByIdAndUpdate(req.params.id, req.body,{
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    console.log("pt=roduct", product)
+
+    res.status(200).json({
+        success: true,
+        product
+    })
+
+}
