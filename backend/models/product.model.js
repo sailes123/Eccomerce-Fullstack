@@ -5,6 +5,7 @@ const productSchema = new Schema(
     name: {
       type: String,
       trim: true,
+      required: true
     },
     description: {
       type: String,
@@ -12,6 +13,7 @@ const productSchema = new Schema(
     price: {
       type: Number,
       maxLength: [8, "Price cannot exceed 8 characters"],
+      required: true
     },
     rating: {
       type: Number,
