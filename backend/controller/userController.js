@@ -1,5 +1,5 @@
-import { catchAsyncErrors } from "../middleware/catchAsyncError";
-import { User } from "../models/user.model";
+import { catchAsyncErrors } from "../middleware/catchAsyncError.js";
+import { User } from "../models/user.model.js";
 
 export const registerUser = catchAsyncErrors( async(req,res,next) => {
    const {name, email, password} = req.body;
