@@ -9,6 +9,9 @@ const connectDataBase = () => {
     .then((data) => {
       console.log(`Mongodb is connected: ${data.connection.host}`);
     })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export { connectDataBase };
