@@ -28,17 +28,16 @@ class ApiFeatures {
                 queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\h/g, (key)=> `$${key}`)
 
                 removeFields.forEach(key => delete queryCopy[key])
+                return this
         }
 
-        pagination(resultPerPage){
-          const currentPage = Number(this.queryStr.page) || 1;
-
-          const skip = resultPerPage * (currentPage - 1);
-
-          this.query = this.query.limit(resultPerPage).skip(skip)
-
-          return this;
-        }
+        pagination(resultPerPage) {
+                const currentPage = Number(this.queryStr.page) || 1;
+                const skip = resultPerPage * (currentPage - 1);
+        
+                this.query = this.query.limit(resultPerPage).skip(skip);
+                return this;
+            }
 }
 
 export default ApiFeatures;
