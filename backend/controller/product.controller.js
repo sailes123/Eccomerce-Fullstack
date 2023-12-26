@@ -6,6 +6,8 @@ import ErrorHandler from "../utils/errorHandler.js";
 // Create products -- Admin
 export const createProduct = catchAsyncErrors(async (req, res) => {
   try {
+    req.body.user = req.user.id;
+
     const product = await Product.create(req.body);
 
     res.status(201).json({
@@ -24,19 +26,19 @@ export const createProduct = catchAsyncErrors(async (req, res) => {
 export const getAllProducts = catchAsyncErrors(async (req, res) => {
   const resultPagination = 5;
 
-  const productCount = await Product.countDocuments()
+  const productCount = await Product.countDocuments();
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
-    .pagination(resultPagination)
+    .pagination(resultPagination);
 
   const products = await apiFeatures.query;
 
   res.status(200).json({
     success: true,
     products,
-    productCount
+    productCount,
   });
 });
 

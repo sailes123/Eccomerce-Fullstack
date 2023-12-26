@@ -59,6 +59,11 @@ const productSchema = new Schema(
         },
       },
     ],
+    createdBy: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true
+    }
   },
   {
     timestamps: true,
